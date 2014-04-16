@@ -1,0 +1,31 @@
+<html> 
+<body> 
+<form name="login" action="login1.php" method="POST">   <!登录验证页：login1.php>
+用户名<input type="text" name="name"/> 
+<p>密码<input type="password" name="password"/> </p> 
+<input name="log" type="submit" value="登录"> 
+</form> 
+</body> 
+</html>
+
+     login1.php代码：
+
+<?php 
+$mysqli=mysqli_connect("localhost","root","***","testdb");
+$name=$_POST["name"]; 
+$passowrd=$_POST["password"]; 
+if ($name && $passowrd){ 
+$sql = "SELECT * FROM test1 WHERE name='$name' and password='$passowrd'"; 
+$res = mysqli_query($mysqli,$sql); 
+$rows=mysqli_num_rows($res); 
+if($rows){ 
+header("location:index.php"); 
+exit; 
+}
+ else{
+echo "faile";
+}
+mysqli_free_result($res);
+mysqli_close($mysqli);
+}
+?> 
